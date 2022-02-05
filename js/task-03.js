@@ -24,5 +24,7 @@ images.forEach(({url, alt}) => {
    listRef.style.listStyle = 'none';
    listRef.style.display = 'flex';
    listRef.style.flexWrap = 'wrap';
-   listRef.style.justifyContent = 'space-evenly';  
+   listRef.style.alignItems = 'center';
+   listRef.style.justifyContent = 'space-evenly';
+   listRef.style.padding = '0px';
 });
