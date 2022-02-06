@@ -9,3 +9,4 @@ function updateValue(event) {
    event.currentTarget.value === '' ? refs.textOutput.textContent = 'Anonymous' :
       refs.textOutput.textContent = event.currentTarget.value;
 }
+
