@@ -15,30 +15,12 @@ const images = [
 
 const galleryListRef = document.querySelector('.gallery');
 
-images.forEach(({url, alt}) => {
-   galleryListRef.insertAdjacentHTML(
-      'beforeend', `<li class='gallery__item'>
-    <img class='gallery__image' src='${url}' alt='${alt}' width='300'>
-</li>`
-   );
-   galleryListRef.style.listStyle = 'none';
-   galleryListRef.style.display = 'flex';
-   galleryListRef.style.flexWrap = 'wrap';
-   galleryListRef.style.alignItems = 'center';
-   galleryListRef.style.justifyContent = 'space-evenly';
-   galleryListRef.style.padding = '0px';
-});
- 
+const itemsRef = images.map((image) => `<li><img src="${image.url}" alt="${image.alt}" width = '300'></li>`).join("");
 
- 
-// images.map(item => {   
-//    galleryListRef.insertAdjacentHTML(
-//       "beforeend", `<li class= 'gallery__item'>
-//       <img src='${item.url}' alt='${item.alt}' width ='300'></li>`);
-//       galleryListRef.style.listStyle = 'none';
-//    galleryListRef.style.display = 'flex';
-//    galleryListRef.style.flexWrap = 'wrap';
-//    galleryListRef.style.alignItems = 'center';
-//    galleryListRef.style.justifyContent = 'space-evenly';
-//    galleryListRef.style.padding = '0px';
-// })
+galleryListRef.style.listStyle = 'none';
+galleryListRef.style.display = 'flex';
+galleryListRef.style.flexWrap = 'wrap';
+galleryListRef.style.alignItems = 'center';
+galleryListRef.style.justifyContent = 'space-evenly';
+galleryListRef.style.padding = '0px';
+galleryListRef.insertAdjacentHTML("beforeend", itemsRef);
