@@ -1,38 +1,48 @@
-let initialSizeOfBox = 30;
+// Напиши скрипт создания и очистки коллекции элементов.Пользователь вводит количество
+//  элементов в input и нажимает кнопку Создать, после чего рендерится коллекция.
+//  При нажатии на кнопку Очистить, коллекция элементов очищается.
+// Создай функцию createBoxes(amount), которая принимает один параметр - число.
+// Функция создает столько < div >, сколько указано в amount и добавляет их в div#boxes.
+// 1. Размеры самого первого <div> - 30px на 30px.
+// 2. Каждый элемент после первого, должен быть шире и выше предыдущего на 10px.
+// 3. Все элементы должены иметь случайный цвет фона в формате HEX.
+// 4. Используй готовую функцию getRandomHexColor для получения цвета.
+// 5. Создай функцию destroyBoxes(), которая очищает содержимое div#boxes,
+//    тем самым удаляя все созданные элементы.
+
 const refs = {
-  createBtn: document.querySelector('[data-create]'),
-  destroyBtn: document.querySelector('[data-destroy]'),
-  boxesParent: document.querySelector('#boxes'),
-  inputEl: document.querySelector('#controls').firstElementChild,
-};
-refs.createBtn.addEventListener('click', createBtnListener);
-refs.destroyBtn.addEventListener('click', destroyBoxes);
-
-function createBtnListener() {
-  const amountOfBoxes = createBoxes(refs.inputEl.value);
-  refs.boxesParent.append(...amountOfBoxes);
+   inputRef: document.querySelector('#controls').firstElementChild,
+   createBtn: document.querySelector('[data-create]'),
+   destroyBtn: document.querySelector('[data-destroy]'),   
+   parentOfNewBoxes: document.querySelector('#boxes'),
 }
-
+let initialSizeOfBox = 30;
 function createBoxes(amount) {
-  let sizeOfBox = 0;
-  const boxElements = [];
-  for (let i = 0; i < amount; i += 1) {
-    const boxEl = document.createElement('div');
-    boxEl.style.backgroundColor = getRandomHexColor();
-    boxEl.style.display = 'block';
-    sizeOfBox = initialSizeOfBox + i * 10;
-    boxEl.style.width = `${sizeOfBox}px`;
-    boxEl.style.height = `${sizeOfBox}px`;
-    boxElements.push(boxEl);
-  }
-  return boxElements;
+   let sizeBox = 0;
+   const boxElements = [];
+   for (let i = 0; i < amount; i += 1) {
+      const boxElement = document.createElement('div');
+      boxElement.style.backgroundColor = getRandomHexColor();
+      boxElement.style.display = 'block';
+      sizeBox = initialSizeOfBox + i * 10;
+      boxElement.style.width = `${sizeBox}px`;
+      boxElement.style.height = `${sizeBox}px`;
+      boxElements.push(boxElement);
+   }
+   return boxElements; 
 }
-
-function destroyBoxes() {
-  refs.boxesParent.innerHTML = '';
-  initialSizeOfBox = 30;
+refs.createBtn.addEventListener('click', onCreateBtnClick);
+function onCreateBtnClick() {
+   const amountOfBoxes = createBoxes(refs.inputRef.value);
+   refs.parentOfNewBoxes.append(...amountOfBoxes);
 }
-
+refs.destroyBtn.addEventListener('click', onDestroyBtnClick);
+function onDestroyBtnClick() {
+   refs.parentOfNewBoxes.innerHTML = '';
+   refs.inputRef.value = '';
+}
 function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
 }
